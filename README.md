@@ -1,3 +1,3 @@
-**Alhaji's Portfolio of SQL Code That Shows All The Amazing Things He Has Learned, Discoverd, And Improved on!**<br/>
+**Alhaji's Portfolio of SQL Code That Shows All The Amazing Things Learned, Discoverd, And Improved On!**<br/>
 
-Feel free to browse my SQL Portfolio, and ask me questions. This repository contains my SQL code and thoughts.
+Feel free to browse my SQL Portfolio, and ask me questions. Fun fact; I started my SQL journey on March 31, 2025.
