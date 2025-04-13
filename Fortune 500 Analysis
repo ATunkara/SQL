@@ -97,14 +97,7 @@ HAVING employees < 3000
 ORDER BY Total_revenue_per_company DESC;
 
 -- Which Industry has the most employees.
---query#5
-SELECT industry, 
-SUM(employees) AS most_employees
-FROM fortune_companies
-GROUP BY industry
-HAVING employees > 1000000;
 
---query#6
 SELECT industry, 
 MAX(employees) AS most_employees
 FROM fortune_companies
