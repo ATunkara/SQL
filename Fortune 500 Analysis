@@ -57,10 +57,9 @@ VALUES
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
 
--- Display the companies with healthcare benifits and the amount of maternatiy leave >=12 wks in Healthcare industry.
+-- Display the companies with healthcare benifits and the amount of maternity leave >=12 wks in Healthcare industry.
 
 SELECT company_name,
-industry,
 maternity_leave_weeks
 FROM fortune_companies
 WHERE industry IN('Healthcare')
@@ -68,7 +67,7 @@ AND healthcare_benefits = 1
 GROUP BY company_name
 HAVING maternity_leave_weeks >= 12;
 
--- Categorze the companys revnue based on which companies from best to worst to invest in.
+-- Categorize the companies revnue from best to worst to invest in.
 
 SELECT	company_name, 
 revenue,
@@ -79,27 +78,26 @@ ELSE 'Cautious investement'
 END AS Investment_guide
 FROM fortune_companies;
 
--- How many weeks can an employee have off from work factoring evereything
+-- What are the 5 best companies an employee can have many weeks off factoring everything
 SELECT company_name,
 paid_time_off_days + maternity_leave_weeks AS Total_time_off
 FROM fortune_companies
 ORDER BY Total_time_off DESC
 LIMIT 5;
 
--- Companies that have the most revenue with less than 3000 eployees
+-- The companies revenue with less than 3000 eployees
 
 SELECT company_name,
-industry,
-ROUND(SUM(revenue), 2) As Total_revenue_per_company
+revenue,
+employees
 FROM fortune_companies
-Group By company_name
-HAVING employees < 3000
-ORDER BY Total_revenue_per_company DESC;
+WHERE employees < 3000
+ORDER BY revenue DESC;
 
--- Which Industry has the most employees.
+-- What are the total amount of employees in each industry.
 
 SELECT industry, 
-MAX(employees) AS most_employees
+SUM(employees) AS most_employees
 FROM fortune_companies
 GROUP BY industry
-HAVING employees > 1000000;
+ORDER BY most_employees DESC;
