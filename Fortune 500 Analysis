@@ -85,7 +85,7 @@ FROM fortune_companies
 ORDER BY Total_time_off DESC
 LIMIT 5;
 
--- The companies revenue with less than 3000 eployees
+-- The companies revenue with less than 3000 employees
 
 SELECT company_name,
 revenue,
