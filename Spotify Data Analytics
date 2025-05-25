@@ -1,0 +1,82 @@
+-- I created a table and inserted Spotify data which I downloaded from a database website.
+-- I queried the data to find out information that would be usefull for my hobbies or road trips.
+
+--This is the table that was used for this project
+
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+song_key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+song_mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness decimal(8,7) NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL )
+
+-- Here is a sample of what some of the data looks like
+1	Olivia Rodrigo	drivers license	5wANPM4fQCJwkGd4rN57mH	92	0.561	0.431	10	-8.81	1	0.0578	0.768	0.0000142	0.106	0.137	143.875	242013	4
+2	Lil Nas X	MONTERO (Call Me By Your Name)	1SC5rEoYDGUK4NfG82494W	90	0.593	0.503	8	-6.725	0	0.22	0.293	0	0.405	0.71	178.781	137704	4
+3	The Kid LAROI	STAY (with Justin Bieber)	5PjdY0CKGZdEuoNab3yDmX	92	0.591	0.764	1	-5.484	1	0.0483	0.0383	0	0.103	0.478	169.928	141806	4
+4	Olivia Rodrigo	good 4 u	4ZtFanR9U6ndgddUvNcjcG	95	0.563	0.664	9	-5.044	1	0.154	0.335	0	0.0849	0.688	166.928	178147	4
+5	Dua Lipa	Levitating (feat. DaBaby)	5nujrmhLynf4yMoMtj8AQF	89	0.702	0.825	6	-3.787	0	0.0601	0.00883	0	0.0674	0.915	102.977	203064	4
+
+# These are my querys
+
+SELECT *
+FROM BIT_DB.Spotifydata
+LIMIT 5;
+
+--Query 1, Which songs by artist has a popularity of at least 90, and the tempo of 170 or more for kick boxing class?
+SELECT artist_name,
+track_name
+FROM BIT_DB.Spotifydata
+WHERE popularity > 89
+AND tempo > 169;
+
+--Query 2, What is the most danceability song to play for people?
+
+--Inner Query
+SELECT MAX(danceability)
+FROM BIT_DB.Spotifydata;
+
+--Outer Query
+SELECT track_name
+FROM BIT_DB.Spotifydata
+WHERE danceability IN ();
+
+-- Combined inner and outer query
+SELECT track_name
+FROM BIT_DB.Spotifydata
+WHERE danceability IN (SELECT MAX(danceability)
+FROM BIT_DB.Spotifydata);
+
+--Query 3, How many tracks in this playlist are at least 3 minutes long?
+-- equation for 3 minutes as ms: (3)min * 60sec * 1000ms
+SELECT COUNT(*)
+FROM BIT_DB.Spotifydata
+WHERE duration_ms >= 3 * 60 * 1000;
+
+--Query 4, What is the average length of songs in this playlist?
+
+SELECT AVG(duration_ms) AS "Average Time"
+FROM BIT_DB.Spotifydata;
+
+--Query 5, which song has the most popularity with the least energy?
+
+SELECT artist_name, track_name
+FROM BIT_DB.Spotifydata
+WHERE popularity > 90
+AND energy < 0.51
+ORDER BY energy ASC
+LIMIT 1;
+
